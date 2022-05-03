@@ -24,7 +24,7 @@ export default {
       return this.stats.globalStats.map(
         stat => ({
           value: this.getErrorRate(stat.metrics),
-        })
+        }),
       )
     },
 
@@ -39,7 +39,7 @@ export default {
           name: stat.group.queryName,
           signature: stat.group.querySignature,
           value: this.getErrorRate(stat.metrics),
-        })
+        }),
       )
     },
   },

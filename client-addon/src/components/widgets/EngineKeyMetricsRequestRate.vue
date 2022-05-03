@@ -40,7 +40,7 @@ export default {
         stat => ({
           value: stat.metrics.uncachedRequestsCount +
             stat.metrics.cachedRequestsCount,
-        })
+        }),
       )
     },
 
@@ -52,7 +52,7 @@ export default {
           signature: stat.group.querySignature,
           value: (stat.metrics.uncachedRequestsCount +
             stat.metrics.cachedRequestsCount) * this.timeRatio,
-        })
+        }),
       )
     },
   },

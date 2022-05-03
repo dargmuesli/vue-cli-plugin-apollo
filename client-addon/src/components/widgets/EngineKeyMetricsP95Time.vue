@@ -24,7 +24,7 @@ export default {
       return this.stats.globalStats.map(
         stat => ({
           value: stat.metrics.totalLatencyHistogram.p95Time,
-        })
+        }),
       )
     },
 
@@ -39,7 +39,7 @@ export default {
           name: stat.group.queryName,
           signature: stat.group.querySignature,
           value: stat.metrics.totalLatencyHistogram.p95Time,
-        })
+        }),
       ).sort((a, b) => b.value - a.value)
     },
   },
