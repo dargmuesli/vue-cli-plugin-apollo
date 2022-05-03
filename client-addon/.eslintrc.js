@@ -8,9 +8,9 @@ module.exports = {
     '@vue/standard',
   ],
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'warning' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'comma-dangle': ['error', 'always-multiline'],
+    'no-console': process.env.NODE_ENV === 'production' ? 1 : 0,
+    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+    'comma-dangle': [2, 'always-multiline'],
   },
   parserOptions: {
     parser: 'babel-eslint',
