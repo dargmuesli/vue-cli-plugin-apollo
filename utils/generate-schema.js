@@ -3,7 +3,7 @@ module.exports = async (options) => {
   const fs = require('fs-extra')
   const { logWithSpinner, stopSpinner, done } = require('@vue/cli-shared-utils')
   const { graphql, getIntrospectionQuery, printSchema } = require('graphql')
-  const { makeExecutableSchema } = require('graphql-tools')
+  const { makeExecutableSchema } = require('@graphql-tools/schema')
   const { load } = require('./load')(options)
 
   // JS Schema
