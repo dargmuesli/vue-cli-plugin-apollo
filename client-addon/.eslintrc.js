@@ -3,7 +3,7 @@ module.exports = {
   env: {
     node: true,
   },
-  'extends': [
+  extends: [
     'plugin:vue/essential',
     '@vue/standard',
   ],
@@ -13,11 +13,11 @@ module.exports = {
     'comma-dangle': [2, 'always-multiline'],
   },
   parserOptions: {
-    parser: 'babel-eslint',
+    parser: '@babel/eslint-parser',
   },
   globals: {
-    'ClientAddonApi': false,
-    'mapSharedData': false,
-    'Vue': false,
+    ClientAddonApi: false,
+    mapSharedData: false,
+    Vue: false,
   },
 }

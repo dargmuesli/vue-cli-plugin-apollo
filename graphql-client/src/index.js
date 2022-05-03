@@ -160,15 +160,18 @@ export function createApolloClient ({
     link,
     cache,
     // Additional options
-    ...(ssr ? {
-      // Set this on the server to optimize queries when SSR
-      ssrMode: true,
-    } : {
-      // This will temporary disable query force-fetching
-      ssrForceFetchDelay: 100,
-      // Apollo devtools
-      connectToDevTools: process.env.NODE_ENV !== 'production',
-    }),
+    ...(ssr
+      ? {
+          // Set this on the server to optimize queries when SSR
+          ssrMode: true,
+        }
+      : {
+          // This will temporary disable query force-fetching
+          ssrForceFetchDelay: 100,
+          // Apollo devtools
+          connectToDevTools: process.env.NODE_ENV !== 'production',
+        }
+    ),
     typeDefs,
     resolvers,
     ...apollo,

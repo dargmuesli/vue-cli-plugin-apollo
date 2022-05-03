@@ -4,8 +4,8 @@ module.exports = {
   // File parser
   parser: 'vue-eslint-parser',
   parserOptions: {
-    // Use babel-eslint for JavaScript
-    parser: 'babel-eslint',
+    // Use @babel/eslint-parser for JavaScript
+    parser: '@babel/eslint-parser',
     ecmaVersion: 2017,
     // With import/export syntax
     sourceType: 'module',
@@ -41,7 +41,6 @@ module.exports = {
       singleline: 2,
       multiline: {
         max: 1,
-        allowFirstLine: false,
       },
     }],
     // Warn
