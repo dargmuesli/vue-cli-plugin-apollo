@@ -1,5 +1,6 @@
 {
     "extends": [
       "github>dargmuesli/renovate-config"
-    ]
-  }
+    ],
+    "includeForks": true
+}
