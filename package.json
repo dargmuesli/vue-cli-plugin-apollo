@@ -45,7 +45,7 @@
     "apollo-server-express": "^2.14.2",
     "apollo-upload-client": "^13.0.0",
     "apollo-utilities": "^1.3.4",
-    "chalk": "^4.0.0",
+    "chalk": "^5.0.0",
     "deepmerge": "^4.2.2",
     "dotenv": "^8.2.0",
     "esm": "^3.2.25",
