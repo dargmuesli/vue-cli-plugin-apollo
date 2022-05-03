@@ -10,7 +10,7 @@
     "build:graphql-client": "babel graphql-client/src --out-dir graphql-client/dist",
     "build:client-addon": "cd ./client-addon && yarn build && cd ../",
     "prepublishOnly": "npm run test && npm run build",
-    "test": "npm run test:eslint && cd ./client-addon npm run lint",
+    "test": "npm run test:eslint && cd ./client-addon && npm run lint",
     "test:eslint": "eslint --ext .js .",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
