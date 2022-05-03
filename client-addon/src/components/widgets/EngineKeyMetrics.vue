@@ -40,6 +40,7 @@
 import RequestRate from './EngineKeyMetricsRequestRate.vue'
 import P95Time from './EngineKeyMetricsP95Time.vue'
 import ErrorPercentage from './EngineKeyMetricsErrorPercentage.vue'
+import consola from 'consola'
 
 const COMPONENTS = {
   requestRate: RequestRate,
@@ -123,7 +124,7 @@ export default {
         this.widget.customTitle = `${this.data.service.name}@${this.widget.data.config.tag || 'untagged'}`
       } catch (e) {
         this.error = true
-        console.error(e)
+        consola.error(e)
       }
 
       this.loading = false
