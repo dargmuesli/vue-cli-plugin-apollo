@@ -1,9 +1,8 @@
 declare module 'vue-cli-plugin-apollo/graphql-client' {
-  import { ApolloClient, ApolloClientOptions, Resolvers } from 'apollo-client'
-  import { DocumentNode } from 'apollo-link'
-  import { SubscriptionClient } from 'subscriptions-transport-ws'
-  import { ClientStateConfig } from 'apollo-link-state'
-  import { InMemoryCacheConfig } from 'apollo-cache-inmemory'
+  import { PersistedQueryLink } from '@apollo/client/link/persisted-queries'
+  import { ApolloClient, ApolloClientOptions, Resolvers, DocumentNode } from '@apollo/client/core'
+  import { InMemoryCacheConfig } from '@apollo/client/cache'
+  import { Client } from 'graphql-ws'
 
   export interface ApolloClientClientConfig<TCacheShape> {
     // URL to the HTTP API
@@ -13,7 +12,7 @@ declare module 'vue-cli-plugin-apollo/graphql-client' {
     // Token used in localstorage
     tokenName?: string
     // Enable this if you use Query persisting with Apollo Engine
-    persisting?: boolean
+    persisting?: boolean | PersistedQueryLink.Options
     // Is currently Server-Side Rendering or not
     ssr?: boolean
     // Only use Websocket for all requests (including queries and mutations)
@@ -32,8 +31,6 @@ declare module 'vue-cli-plugin-apollo/graphql-client' {
     inMemoryCacheOptions?: InMemoryCacheConfig
     // Additional Apollo client options
     apollo?: ApolloClientOptions<TCacheShape>
-    // apollo-link-state options
-    clientState?: ClientStateConfig
     // Function returning Authorization header token
     getAuth?: (tokenName: string) => string | void
     // Local Schema
@@ -48,25 +45,18 @@ declare module 'vue-cli-plugin-apollo/graphql-client' {
     config: ApolloClientClientConfig<TCacheShape>
   ): {
     apolloClient: ApolloClient<TCacheShape>
-    wsClient: SubscriptionClient
-    // stateLink: withClientState
+    wsClient: Client
   }
 
-  export function restartWebsockets(wsClient: SubscriptionClient): void
+  export function restartWebsockets(wsClient: Client): void
 }
 
 declare module 'vue-cli-plugin-apollo/graphql-server' {
-  // eslint-disable-next-line import/no-duplicates
-  import { Resolvers } from 'apollo-client'
+  import { Resolvers, DocumentNode } from '@apollo/client/core'
   import { ContextFunction, Context } from 'apollo-server-core'
   import { ExpressContext } from 'apollo-server-express/dist/ApolloServer'
   import { DataSources } from 'apollo-server-core/dist/graphqlOptions'
-  import {
-    ApolloServerExpressConfig,
-    SchemaDirectiveVisitor
-  } from 'apollo-server-express'
-  // eslint-disable-next-line import/no-duplicates
-  import { DocumentNode } from 'apollo-link'
+  import { ApolloServerExpressConfig } from 'apollo-server-express'
   import { PubSubEngine } from 'graphql-subscriptions'
   import { Express } from 'express'
 
@@ -100,7 +90,7 @@ declare module 'vue-cli-plugin-apollo/graphql-server' {
       context: ContextFunction<ExpressContext, Context> | Context
       pubsub?: PubSubEngine
       server?: (app: Express) => void
-      directives: Record<string, typeof SchemaDirectiveVisitor>
+      directives: Record<string, any>
       dataSources?: () => DataSources<TContext>
     }
   }

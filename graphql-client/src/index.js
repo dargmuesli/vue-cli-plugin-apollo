@@ -1,14 +1,11 @@
-import { ApolloClient } from 'apollo-client'
-import { split, from } from 'apollo-link'
+import { ApolloClient, from, split } from '@apollo/client/core'
 import { createUploadLink } from 'apollo-upload-client'
-import { InMemoryCache } from 'apollo-cache-inmemory'
-import { SubscriptionClient } from 'subscriptions-transport-ws'
-import MessageTypes from 'subscriptions-transport-ws/dist/message-types'
-import { WebSocketLink } from 'apollo-link-ws'
-import { getMainDefinition } from 'apollo-utilities'
-import { createPersistedQueryLink } from 'apollo-link-persisted-queries'
-import { setContext } from 'apollo-link-context'
-import { withClientState } from 'apollo-link-state'
+import { InMemoryCache } from '@apollo/client/cache'
+import { createClient, MessageType } from 'graphql-ws'
+import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
+import { getMainDefinition } from '@apollo/client/utilities'
+import { createPersistedQueryLink, PersistedQueryLink } from '@apollo/client/link/persisted-queries'
+import { setContext } from '@apollo/client/link/context'
 
 // Create the apollo client
 export function createApolloClient ({
@@ -107,7 +104,7 @@ export function createApolloClient ({
     }
 
     if (!disableHttp) {
-      let persistingOpts = {}
+      let persistingOpts
       if (typeof persisting === 'object' && persisting != null) {
         persistingOpts = persisting
         persisting = true
@@ -119,8 +116,8 @@ export function createApolloClient ({
 
     // Web socket
     if (wsEndpoint) {
-      wsClient = new SubscriptionClient(wsEndpoint, {
-        reconnect: true,
+      wsClient = createClient({
+        url: wsEndpoint,
         connectionParams: () => {
           const Authorization = getAuth(tokenName)
           return Authorization ? { Authorization, headers: { Authorization } } : {}
@@ -128,7 +125,7 @@ export function createApolloClient ({
       })
 
       // Create the subscription websocket link
-      const wsLink = new WebSocketLink(wsClient)
+      const wsLink = new GraphQLWsLink(wsClient)
 
       if (disableHttp) {
         link = link ? link.concat(wsLink) : wsLink
@@ -136,9 +133,9 @@ export function createApolloClient ({
         link = split(
           // split based on operation type
           ({ query }) => {
-            const { kind, operation } = getMainDefinition(query)
-            return kind === 'OperationDefinition' &&
-              operation === 'subscription'
+            const mainDefinition = getMainDefinition(query)
+            return mainDefinition.kind === 'OperationDefinition' &&
+              mainDefinition.operation === 'subscription'
           },
           wsLink,
           link,
@@ -148,12 +145,7 @@ export function createApolloClient ({
   }
 
   if (clientState) {
-    console.warn('clientState is deprecated, see https://vue-cli-plugin-apollo.netlify.com/guide/client-state.html')
-    stateLink = withClientState({
-      cache,
-      ...clientState,
-    })
-    link = from([stateLink, link])
+    console.error('clientState is not used anymore')
   }
 
   const apolloClient = new ApolloClient({
@@ -208,7 +200,7 @@ export function restartWebsockets (wsClient) {
   Object.keys(operations).forEach(id => {
     wsClient.sendMessage(
       id,
-      MessageTypes.GQL_START,
+      MessageType.ConnectionInit,
       operations[id].options,
     )
   })
