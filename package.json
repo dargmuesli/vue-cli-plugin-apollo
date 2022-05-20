@@ -33,7 +33,7 @@
   "homepage": "https://github.com/Akryum/vue-cli-plugin-apollo#readme",
   "dependencies": {
     "@apollo/client": "3.6.2",
-    "@graphql-tools/schema": "8.3.10",
+    "@graphql-tools/schema": "8.3.13",
     "apollo": "2.33.10",
     "apollo-server-express": "3.6.7",
     "apollo-upload-client": "17.0.0",
