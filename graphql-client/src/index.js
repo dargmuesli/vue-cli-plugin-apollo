@@ -4,7 +4,7 @@ import { InMemoryCache } from '@apollo/client/cache'
 import { createClient, MessageType } from 'graphql-ws'
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
 import { getMainDefinition } from '@apollo/client/utilities'
-import { createPersistedQueryLink, PersistedQueryLink } from '@apollo/client/link/persisted-queries'
+import { createPersistedQueryLink } from '@apollo/client/link/persisted-queries'
 import { setContext } from '@apollo/client/link/context'
 
 // Create the apollo client
