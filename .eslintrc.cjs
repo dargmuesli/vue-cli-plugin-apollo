@@ -4,9 +4,7 @@ module.exports = {
   // File parser
   parser: 'vue-eslint-parser',
   parserOptions: {
-    // Use @babel/eslint-parser for JavaScript
-    parser: '@babel/eslint-parser',
-    ecmaVersion: 2017,
+    ecmaVersion: 2018,
     // With import/export syntax
     sourceType: 'module',
   },

@@ -12,9 +12,6 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     'comma-dangle': [2, 'always-multiline'],
   },
-  parserOptions: {
-    parser: '@babel/eslint-parser',
-  },
   globals: {
     ClientAddonApi: false,
     mapSharedData: false,
