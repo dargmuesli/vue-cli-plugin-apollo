@@ -66,7 +66,7 @@ export default {
 $color = $vue-ui-color-warning
 
 .engine-key-metrics-view
-  /deep/
+  :deep()
     .main-stat
       .value
         color $color
