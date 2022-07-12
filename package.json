@@ -68,8 +68,8 @@
     "vuepress": "1.9.7"
   },
   "peerDependencies": {
-    "@vue/cli-shared-utils": "3.0.0 || 4.0.0-0 || 3.12",
-    "typescript": ">=2.0"
+    "@vue/cli-shared-utils": ">=3",
+    "typescript": ">=2"
   },
   "peerDependenciesMeta": {
     "typescript": {
@@ -77,6 +77,6 @@
     }
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=14"
   }
 }
