@@ -22,7 +22,7 @@
     "@vue/cli-service": "5.0.8",
     "@vue/cli-ui": "5.0.8",
     "@vue/eslint-config-standard": "7.0.0",
-    "eslint": "8.19.0",
+    "eslint": "8.23.0",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-n": "15.2.4",
     "eslint-plugin-promise": "6.0.0",
